@@ -301,9 +301,6 @@ legend { margin-bottom: 8px; }
 .legal-document li + li { margin-top: 7px; }
 .legal-document a { color: var(--teal); text-decoration: underline; text-underline-offset: 3px; }
 .legal-meta { margin-bottom: 28px; color: var(--ink-soft); font-size: 13px; }
-.legal-warning { margin: 26px 0; padding: 18px 20px; border: 1px solid #c99736; border-radius: 14px; background: #fff6db; color: #5a4315 !important; font-weight: 700; }
-.legal-placeholder { padding: 2px 6px; border-radius: 5px; background: #fff0ef; color: #9d2f28; font-weight: 800; }
-.legal-summary { margin: 26px 0; padding: 22px; border-left: 4px solid var(--mint); border-radius: 0 12px 12px 0; background: var(--cream); }
 .legal-document table { width: 100%; border-collapse: collapse; margin: 18px 0 28px; font-size: 14px; }
 .legal-document th, .legal-document td { padding: 12px; border: 1px solid var(--line); vertical-align: top; text-align: left; line-height: 1.55; }
 .legal-document th { background: var(--cream); }
