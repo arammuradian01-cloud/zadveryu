@@ -13,11 +13,19 @@ const cityInput = form.elements.city;
 const addressInput = form.elements.address;
 const addressSuggestions = document.querySelector("#address-suggestions");
 const addressStatus = document.querySelector("#address-status");
+const submitButton = document.querySelector("#submit-application");
+const storageNote = document.querySelector("#form-storage-note");
+const footerDataNote = document.querySelector("#footer-data-note");
+const startedAtInput = document.querySelector("#form-started-at");
+const environmentBar = document.querySelector("#environment-bar span");
 const dadataToken = document.querySelector('meta[name="dadata-token"]')?.content.trim() || "";
 
 const DADATA_ADDRESS_URL = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
 const ADDRESS_SEARCH_DELAY = 320;
 const APPLICATION_EMAIL = "I@arammuradian.ru";
+const CONSENT_VERSION = "personal-data-v1.3-2026-08-10";
+const PRODUCTION_HOSTS = new Set(["outthedoor.ru", "www.outthedoor.ru"]);
+const isProductionHost = PRODUCTION_HOSTS.has(window.location.hostname.toLowerCase());
 
 let addressSearchTimer;
 let addressSearchController;
@@ -25,6 +33,36 @@ let addressResults = [];
 let activeAddressIndex = -1;
 
 let applicationText = "";
+
+startedAtInput.value = String(Date.now());
+
+if (isProductionHost) {
+  submitButton.disabled = true;
+  submitButton.firstChild.textContent = "Проверяем доступность… ";
+  storageNote.textContent = "Проверяем, открыт ли приём заявок.";
+
+  fetch(`${form.dataset.productionEndpoint || "submit.php"}?status=1`, {
+    method: "GET",
+    credentials: "same-origin",
+    headers: { Accept: "application/json" },
+  })
+    .then((response) => response.json())
+    .then((payload) => {
+      if (!payload.enabled) throw new Error("not_live");
+      submitButton.disabled = false;
+      submitButton.firstChild.textContent = "Отправить заявку ";
+      storageNote.textContent = `После отправки заявка поступит в защищённый почтовый ящик ${APPLICATION_EMAIL} в Яндекс 360 и будет храниться не более 12 месяцев с последнего взаимодействия.`;
+      footerDataNote.textContent = "Заявки направляются в защищённую корпоративную почту в России. Оплата на сайте не принимается. Не является публичной офертой.";
+    })
+    .catch(() => {
+      submitButton.disabled = true;
+      submitButton.firstChild.textContent = "Приём заявок скоро ";
+      storageNote.textContent = "Приём заявок пока не открыт. Данные из анкеты никуда не отправляются.";
+      footerDataNote.textContent = "Приём заявок пока не открыт. Оплата на сайте не принимается. Не является публичной офертой.";
+    });
+} else {
+  environmentBar.textContent = "Демонстрация — данные из анкеты не отправляются";
+}
 
 const sourceParams = new URLSearchParams(window.location.search);
 
@@ -240,7 +278,7 @@ document.querySelectorAll(".select-plan").forEach((button) => {
   });
 });
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
   error.textContent = "";
 
@@ -252,6 +290,7 @@ form.addEventListener("submit", (event) => {
 
   const data = new FormData(form);
   const source = getSourceLabel();
+  const clientConfirmedAt = new Date().toISOString();
   const entrance = data.get("entrance").trim();
   const rawAddress = data.get("address").trim();
   const fullAddress = addressInput.dataset.dadataSelected === "true"
@@ -271,18 +310,78 @@ form.addEventListener("submit", (event) => {
     `Время: ${data.get("slot")}`,
     `Тариф: ${data.get("plan")}`,
     `Источник: ${source}`,
-    "Согласие на обработку ПДн: дано, редакция 1.2 от 10.08.2026",
-    `Время подтверждения на устройстве: ${new Date().toISOString()}`,
+    "Согласие на обработку ПДн: дано, редакция 1.3 от 10.08.2026",
+    `Время подтверждения на устройстве: ${clientConfirmedAt}`,
   ].join("\n");
 
-  dialogKicker.textContent = "Заявка готова";
-  dialogTitle.textContent = "Отправьте заявку по почте";
-  summary.textContent = `ЖК «${data.get("complex")}», ${data.get("address")}; удобное время — ${data.get("slot")}.`;
+  const mailtoUrl = `mailto:${APPLICATION_EMAIL}?subject=${encodeURIComponent(`Заявка на пилот «За дверью» — ${data.get("complex")}`)}&body=${encodeURIComponent(applicationText)}`;
+
+  if (isProductionHost) {
+    data.set("source", source);
+    data.set("client_confirmed_at", clientConfirmedAt);
+    data.set("privacy_consent", CONSENT_VERSION);
+
+    const originalButtonHtml = submitButton.innerHTML;
+    submitButton.disabled = true;
+    submitButton.textContent = "Отправляем…";
+
+    try {
+      const response = await fetch(form.dataset.productionEndpoint || form.action, {
+        method: "POST",
+        body: data,
+        credentials: "same-origin",
+        headers: { Accept: "application/json" },
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || !payload.ok) {
+        const requestError = new Error(payload.message || "send_failed");
+        requestError.code = payload.code || "send_failed";
+        throw requestError;
+      }
+
+      dialogKicker.textContent = "Заявка отправлена";
+      dialogTitle.textContent = "Спасибо — всё получилось";
+      summary.textContent = `Номер заявки: ${payload.form_id}. Мы проверим возможность запуска в ЖК «${data.get("complex")}» и свяжемся с вами.`;
+      dialogNote.textContent = `Копия заявки и сведения о согласии сохранены в защищённой почте оператора.`;
+      dialogNote.hidden = false;
+      shareButton.hidden = true;
+      copyButton.hidden = true;
+      shareStatus.textContent = "";
+      dialog.showModal();
+      form.reset();
+      cityInput.value = "Москва";
+      startedAtInput.value = String(Date.now());
+    } catch (sendError) {
+      const isNotLive = sendError.code === "not_live";
+      dialogKicker.textContent = isNotLive ? "Приём ещё не открыт" : "Не удалось отправить автоматически";
+      dialogTitle.textContent = isNotLive ? "Заявка не отправлена" : "Отправьте заявку по почте";
+      summary.textContent = isNotLive
+        ? "Мы завершаем обязательные настройки перед началом приёма заявок."
+        : `Данные заполнены и не потеряны. Можно отправить готовое письмо на ${APPLICATION_EMAIL}.`;
+      dialogNote.textContent = isNotLive
+        ? "Введённые данные никуда не переданы и не сохранены."
+        : "Откроется почтовое приложение. Проверьте письмо и подтвердите отправку.";
+      dialogNote.hidden = false;
+      shareButton.hidden = isNotLive;
+      copyButton.hidden = isNotLive;
+      if (!isNotLive) shareButton.href = mailtoUrl;
+      shareStatus.textContent = isNotLive ? "" : "Сервер временно недоступен.";
+      dialog.showModal();
+    } finally {
+      submitButton.disabled = false;
+      submitButton.innerHTML = originalButtonHtml;
+    }
+    return;
+  }
+
+  dialogKicker.textContent = "Проверка пройдена";
+  dialogTitle.textContent = "Анкета работает";
+  summary.textContent = `Тестовая заявка для ЖК «${data.get("complex")}» заполнена корректно.`;
+  dialogNote.textContent = "Это демонстрационная версия GitHub Pages. Данные никуда не отправлены и не сохранены.";
   dialogNote.hidden = false;
-  shareButton.hidden = false;
-  copyButton.hidden = false;
+  shareButton.hidden = true;
+  copyButton.hidden = true;
   shareStatus.textContent = "";
-  shareButton.href = `mailto:${APPLICATION_EMAIL}?subject=${encodeURIComponent(`Заявка на пилот «За дверью» — ${data.get("complex")}`)}&body=${encodeURIComponent(applicationText)}`;
   dialog.showModal();
 });
 

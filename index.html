@@ -13,7 +13,7 @@
     <script src="cookie-consent.js" defer></script>
   </head>
   <body>
-    <div class="prototype-bar">
+    <div class="prototype-bar" id="environment-bar">
       <span>Собираем заявки из разных ЖК</span>
     </div>
 
@@ -57,7 +57,7 @@
           </div>
         </div>
 
-        <form class="reserve-form reserve-form--hero" id="reserve-form" novalidate>
+        <form class="reserve-form reserve-form--hero" id="reserve-form" action="submit.php" method="post" data-production-endpoint="submit.php" novalidate>
           <div class="form-head">
             <div><strong>Оставьте заявку</strong><span>займёт около 2 минут</span></div>
             <span class="demo-pill">лист ожидания</span>
@@ -137,7 +137,7 @@
             <input
               type="checkbox"
               name="privacy_consent"
-              value="personal-data-v1.2-2026-08-10"
+              value="personal-data-v1.3-2026-08-10"
               required
             />
             <span>
@@ -148,9 +148,15 @@
             </span>
           </label>
 
+          <label class="form-trap" aria-hidden="true">
+            <span>Оставьте это поле пустым</span>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" />
+          </label>
+          <input type="hidden" name="started_at" id="form-started-at" value="" />
+
           <p class="form-error" id="form-error" role="alert"></p>
-          <button class="button button--primary button--wide" type="submit">Подготовить заявку <span>→</span></button>
-          <p class="form-note">Данные остаются на вашем устройстве до отправки. Готовое письмо будет адресовано на I@arammuradian.ru, а отправку подтвердите вы.</p>
+          <button class="button button--primary button--wide" id="submit-application" type="submit">Подготовить заявку <span>→</span></button>
+          <p class="form-note" id="form-storage-note">В тестовой версии данные никуда не отправляются и исчезнут после закрытия страницы.</p>
         </form>
       </section>
 
@@ -383,7 +389,7 @@
         <button class="cookie-settings-link" type="button" data-cookie-settings>Настройки cookie</button>
         <a href="mailto:I@arammuradian.ru">I@arammuradian.ru</a>
       </div>
-      <small>Сайт не хранит данные и не принимает оплату. Не является публичной офертой.</small>
+      <small id="footer-data-note">Тестовая версия не хранит данные и не принимает оплату. Не является публичной офертой.</small>
     </footer>
 
     <dialog class="demo-dialog" id="demo-dialog">
