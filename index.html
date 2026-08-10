@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f2f5ec" />
-    <meta name="dadata-token" content="0fb9585e9f13f2e3c4e7b58f6bd9c1302237dc26" />
     <meta
       name="description"
       content="За дверью — пилот сервиса планового выноса бытового мусора для жителей многоквартирных домов."
@@ -35,11 +34,11 @@
         <a href="#rules">Правила</a>
         <a href="#faq">Вопросы</a>
       </nav>
-      <a class="button button--small button--dark" href="#reserve">Встать в лист ожидания</a>
+      <a class="button button--small button--dark" href="#reserve-form">Оставить заявку</a>
     </header>
 
     <main>
-      <section class="hero section-shell">
+      <section class="hero section-shell" id="reserve">
         <div class="hero__copy">
           <div class="eyebrow"><span></span> Проверяем спрос в вашем ЖК</div>
           <h1>
@@ -53,7 +52,7 @@
             заберёт его и отнесёт на контейнерную площадку вашего дома.
           </p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#reserve">Оставить заявку</a>
+            <a class="button button--primary" href="#reserve-form">Заполнить заявку</a>
             <a class="text-link" href="#how">Как работает <span>↘</span></a>
           </div>
           <div class="hero__facts" aria-label="Основные условия">
@@ -63,36 +62,101 @@
           </div>
         </div>
 
-        <div class="hero__visual" aria-label="Пример ближайшего обхода">
-          <div class="door-scene" aria-hidden="true">
-            <div class="door-scene__wall"></div>
-            <div class="door">
-              <div class="door__number">84</div>
-              <div class="door__handle"></div>
-            </div>
-            <div class="bag"><span>ЗД</span></div>
-            <div class="floor-line"></div>
+        <form class="reserve-form reserve-form--hero" id="reserve-form" novalidate>
+          <div class="form-head">
+            <div><strong>Оставьте заявку</strong><span>займёт около 2 минут</span></div>
+            <span class="demo-pill">бесплатно</span>
+          </div>
+          <p class="form-intro">Сначала запустим дома и ЖК, где соберётся больше всего желающих.</p>
+
+          <div class="form-grid">
+            <label>
+              <span>Ваше имя</span>
+              <input type="text" name="name" autocomplete="name" placeholder="Например, Анна" required />
+            </label>
+            <label>
+              <span>Телефон</span>
+              <input type="tel" name="phone" autocomplete="tel" placeholder="+7 999 000-00-00" required />
+            </label>
           </div>
 
-          <article class="pickup-card">
-            <div class="pickup-card__top">
-              <span class="status-dot"></span>
-              <span>Ближайший обход</span>
-              <strong>Сегодня</strong>
+          <div class="form-grid">
+            <label>
+              <span>Город</span>
+              <input type="text" name="city" autocomplete="address-level2" value="Москва" required />
+            </label>
+            <label>
+              <span>Название ЖК</span>
+              <input type="text" name="complex" placeholder="Например, Вестердам" required />
+            </label>
+          </div>
+
+          <div class="form-field address-field">
+            <label for="address-input">Адрес дома</label>
+            <div class="address-combobox">
+              <input
+                id="address-input"
+                type="text"
+                name="address"
+                autocomplete="off"
+                aria-autocomplete="list"
+                aria-controls="address-suggestions"
+                aria-describedby="address-note address-status"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                placeholder="Начните вводить улицу и дом"
+                role="combobox"
+                required
+              />
+              <div class="address-suggestions" id="address-suggestions" role="listbox" hidden></div>
             </div>
-            <div class="pickup-card__time">20:00–22:00</div>
-            <div class="pickup-card__row">
-              <div>
-                <span>Исполнитель</span>
-                <strong>будет назначен</strong>
-              </div>
-              <div class="avatar-stack" aria-hidden="true">
-                <span>А</span><span>+</span>
-              </div>
+            <small class="input-note" id="address-note">Введите адрес до дома. Номер квартиры не нужен.</small>
+            <small class="address-status" id="address-status" role="status" aria-live="polite"></small>
+          </div>
+
+          <label>
+            <span>Подъезд / секция — необязательно</span>
+            <input type="text" name="entrance" placeholder="Например, 2" />
+          </label>
+
+          <fieldset>
+            <legend>Удобное время</legend>
+            <div class="slot-options">
+              <label><input type="radio" name="slot" value="07:00–09:00" required /><span>07–09<small>утро</small></span></label>
+              <label><input type="radio" name="slot" value="14:00–16:00" /><span>14–16<small>день</small></span></label>
+              <label><input type="radio" name="slot" value="20:00–22:00" /><span>20–22<small>вечер</small></span></label>
             </div>
-            <div class="pickup-card__notice">Уведомим за 10–15 минут</div>
-          </article>
-        </div>
+          </fieldset>
+
+          <label>
+            <span>Предварительный тариф</span>
+            <select name="plan" id="plan-select" required>
+              <option value="">Выберите тариф</option>
+              <option>Базовый — 792 ₽</option>
+              <option>Семейный — 1 390 ₽</option>
+              <option>Ежедневный — 2 490 ₽</option>
+            </select>
+          </label>
+
+          <label class="check-row">
+            <input
+              type="checkbox"
+              name="privacy_consent"
+              value="personal-data-v1.0-2026-08-10"
+              required
+            />
+            <span>
+              Я даю оператору проекта «За дверью» согласие на обработку указанных в анкете
+              персональных данных, чтобы принять заявку и связаться со мной.
+              <a href="consent.html" target="_blank" rel="noopener">Текст согласия</a> ·
+              <a href="privacy.html" target="_blank" rel="noopener">Политика обработки ПДн</a>
+            </span>
+          </label>
+
+          <p class="form-error" id="form-error" role="alert"></p>
+          <button class="button button--primary button--wide" type="submit">Подготовить заявку <span>→</span></button>
+          <p class="form-note">Данные остаются на вашем устройстве. Адрес можно ввести вручную; готовую заявку отправляете только вы.</p>
+        </form>
       </section>
 
       <section class="trust-strip section-shell" aria-label="Условия раннего доступа">
@@ -271,100 +335,12 @@
         </div>
       </section>
 
-      <section class="reserve section-shell" id="reserve">
-        <div class="reserve__copy">
-          <p class="kicker kicker--light">Ранний доступ</p>
-          <h2>Встаньте в лист ожидания</h2>
-          <p>Укажите свой ЖК, адрес дома, удобное время и предварительный тариф. После заполнения отправьте готовую заявку автору публикации.</p>
-          <div class="reserve__assurances">
-            <span>↗ бесплатно</span>
-            <span>↗ без списания денег</span>
-            <span>↗ сайт не хранит ваши данные</span>
-          </div>
+      <section class="bottom-cta section-shell">
+        <div>
+          <p class="kicker kicker--light">Вашего ЖК ещё нет в списке?</p>
+          <h2>Оставьте заявку — спрос жителей определит следующий маршрут.</h2>
         </div>
-
-        <form class="reserve-form" id="reserve-form" novalidate>
-          <div class="form-head">
-            <div><span>Запись на пилот</span><strong>Бесплатно</strong></div>
-            <span class="demo-pill">лист ожидания</span>
-          </div>
-
-          <label>
-            <span>Ваше имя</span>
-            <input type="text" name="name" autocomplete="name" placeholder="Например, Анна" required />
-          </label>
-          <label>
-            <span>Телефон</span>
-            <input type="tel" name="phone" autocomplete="tel" placeholder="+7 999 000-00-00" required />
-          </label>
-
-          <div class="form-grid">
-            <label>
-              <span>Город</span>
-              <input type="text" name="city" autocomplete="address-level2" value="Москва" required />
-            </label>
-            <label>
-              <span>Название ЖК</span>
-              <input type="text" name="complex" placeholder="Например, Вестердам" required />
-            </label>
-          </div>
-
-          <div class="form-field address-field">
-            <label for="address-input">Адрес дома</label>
-            <div class="address-combobox">
-              <input
-                id="address-input"
-                type="text"
-                name="address"
-                autocomplete="off"
-                aria-autocomplete="list"
-                aria-controls="address-suggestions"
-                aria-describedby="address-note address-status"
-                aria-expanded="false"
-                aria-haspopup="listbox"
-                placeholder="Начните вводить улицу и дом"
-                role="combobox"
-                required
-              />
-              <div class="address-suggestions" id="address-suggestions" role="listbox" hidden></div>
-            </div>
-            <small class="input-note" id="address-note">Выберите адрес до дома. Номер квартиры на этом этапе не нужен.</small>
-            <small class="address-status" id="address-status" role="status" aria-live="polite"></small>
-          </div>
-
-          <label>
-            <span>Подъезд / секция — необязательно</span>
-            <input type="text" name="entrance" placeholder="Например, 2" />
-          </label>
-
-          <fieldset>
-            <legend>Удобнее всего</legend>
-            <div class="slot-options">
-              <label><input type="radio" name="slot" value="07:00–09:00" required /><span>07–09<small>утро</small></span></label>
-              <label><input type="radio" name="slot" value="14:00–16:00" /><span>14–16<small>день</small></span></label>
-              <label><input type="radio" name="slot" value="20:00–22:00" /><span>20–22<small>вечер</small></span></label>
-            </div>
-          </fieldset>
-
-          <label>
-            <span>Предварительный тариф</span>
-            <select name="plan" id="plan-select" required>
-              <option value="">Выберите</option>
-              <option>Базовый — 792 ₽</option>
-              <option>Семейный — 1 390 ₽</option>
-              <option>Ежедневный — 2 490 ₽</option>
-            </select>
-          </label>
-
-          <label class="check-row">
-            <input type="checkbox" name="terms" required />
-            <span>Я согласен, чтобы автор публикации связался со мной по поводу пилота</span>
-          </label>
-
-          <p class="form-error" id="form-error" role="alert"></p>
-          <button class="button button--primary button--wide" type="submit">Подготовить заявку <span>→</span></button>
-          <p class="form-note">Сайт не сохраняет данные. При работе подсказок введённая часть адреса передаётся сервису DaData; готовую заявку отправляете только вы.</p>
-        </form>
+        <a class="button button--primary" href="#reserve-form">Перейти к анкете <span>↑</span></a>
       </section>
     </main>
 
@@ -373,8 +349,8 @@
       <p>Пилотный сервис планового выноса бытового мусора</p>
       <div class="footer-links">
         <a href="#rules">Правила</a>
-        <button type="button" class="legal-link">Условия</button>
-        <button type="button" class="legal-link">Конфиденциальность</button>
+        <a href="consent.html">Согласие на ПДн</a>
+        <a href="privacy.html">Политика ПДн</a>
         <a href="#reserve">Поддержка</a>
       </div>
       <small>Запись в лист ожидания бесплатная. Сайт не хранит данные и не принимает оплату. Не является публичной офертой.</small>
@@ -386,10 +362,6 @@
       <p class="kicker" id="dialog-kicker">Заявка готова</p>
       <h2 id="dialog-title">Отправьте её автору публикации</h2>
       <p id="dialog-summary"></p>
-      <div class="dialog-receipt" id="dialog-receipt">
-        <span>Стоимость записи</span>
-        <strong>Бесплатно</strong>
-      </div>
       <p class="dialog-note" id="dialog-note">Нажмите кнопку ниже и выберите личный чат с автором публикации. На компьютере текст можно скопировать.</p>
       <p class="share-status" id="share-status" role="status" aria-live="polite"></p>
       <button class="button button--dark button--wide" id="share-application" type="button">Отправить заявку</button>
