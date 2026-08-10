@@ -270,6 +270,9 @@ legend { margin-bottom: 8px; }
 .dialog-receipt { margin: 24px 0; padding: 18px 0; display: flex; justify-content: space-between; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); }
 .dialog-receipt strong { font: 600 24px "Onest"; }
 .dialog-note { font-size: 11px; }
+.share-status { min-height: 24px; margin: 14px 0 8px; color: var(--ink); font-size: 13px; font-weight: 700; }
+.dialog-done { width: 100%; min-height: 44px; margin-top: 8px; border: 0; background: transparent; color: var(--ink-soft); cursor: pointer; font: 700 13px "Manrope"; }
+[hidden] { display: none !important; }
 
 @media (max-width: 1000px) {
   .site-header { grid-template-columns: 1fr auto; }

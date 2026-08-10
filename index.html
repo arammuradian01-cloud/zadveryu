@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f2f5ec" />
     <meta
       name="description"
-      content="За дверью — демонстрационная версия сервиса планового выноса бытового мусора для жителей ЖК «Вестердам»."
+      content="За дверью — пилот сервиса планового выноса бытового мусора для жителей ЖК «Вестердам»."
     />
     <title>За дверью — вынос мусора по расписанию</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -19,8 +19,8 @@
   </head>
   <body>
     <div class="prototype-bar">
-      <span>Демонстрационная версия</span>
-      <span class="prototype-bar__note">Данные и оплата не отправляются</span>
+      <span>Готовим пилот в ЖК «Вестердам»</span>
+      <span class="prototype-bar__note">Запись в лист ожидания бесплатная</span>
     </div>
 
     <header class="site-header" id="top">
@@ -34,7 +34,7 @@
         <a href="#rules">Правила</a>
         <a href="#faq">Вопросы</a>
       </nav>
-      <a class="button button--small button--dark" href="#reserve">Открыть демо-заявку</a>
+      <a class="button button--small button--dark" href="#reserve">Встать в лист ожидания</a>
     </header>
 
     <main>
@@ -52,7 +52,7 @@
             заберёт его и отнесёт на контейнерную площадку вашего дома.
           </p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#reserve">Пройти демо-запись</a>
+            <a class="button button--primary" href="#reserve">Оставить заявку</a>
             <a class="text-link" href="#how">Как работает <span>↘</span></a>
           </div>
           <div class="hero__facts" aria-label="Основные условия">
@@ -244,7 +244,7 @@
             <p class="kicker">Вопросы</p>
             <h2>Всё, что важно<br />до первого выноса</h2>
           </div>
-          <p class="section-intro">Сейчас сайт показывает сценарий будущего сервиса. Реальные заявки и оплата пока отключены.</p>
+          <p class="section-intro">Сейчас собираем лист ожидания и выбираем корпус с наибольшим спросом. Оплата пока не принимается.</p>
         </div>
         <div class="faq-list">
           <details>
@@ -273,19 +273,19 @@
       <section class="reserve section-shell" id="reserve">
         <div class="reserve__copy">
           <p class="kicker kicker--light">Ранний доступ</p>
-          <h2>Посмотрите, как будет работать запись на пилот</h2>
-          <p>Выберите корпус, удобное время и предварительный тариф. В этой версии данные не отправляются, а деньги не списываются.</p>
+          <h2>Встаньте в лист ожидания</h2>
+          <p>Выберите корпус, удобное время и предварительный тариф. После заполнения отправьте готовую заявку автору публикации через удобный мессенджер.</p>
           <div class="reserve__assurances">
-            <span>↗ без отправки данных</span>
+            <span>↗ бесплатно</span>
             <span>↗ без списания денег</span>
-            <span>↗ сценарий СБП показан условно</span>
+            <span>↗ сайт не хранит ваши данные</span>
           </div>
         </div>
 
         <form class="reserve-form" id="reserve-form" novalidate>
           <div class="form-head">
-            <div><span>Планируемый резерв</span><strong>99 ₽</strong></div>
-            <span class="demo-pill">демо</span>
+            <div><span>Запись на пилот</span><strong>Бесплатно</strong></div>
+            <span class="demo-pill">лист ожидания</span>
           </div>
 
           <label>
@@ -338,12 +338,12 @@
 
           <label class="check-row">
             <input type="checkbox" name="terms" required />
-            <span>Я понимаю, что это демонстрация: данные не отправляются, оплата не производится</span>
+            <span>Я согласен, чтобы автор публикации связался со мной по поводу пилота</span>
           </label>
 
           <p class="form-error" id="form-error" role="alert"></p>
-          <button class="button button--primary button--wide" type="submit">Показать следующий шаг <span>→</span></button>
-          <p class="form-note">Прототип не принимает и не сохраняет данные. Деньги не списываются.</p>
+          <button class="button button--primary button--wide" type="submit">Подготовить заявку <span>→</span></button>
+          <p class="form-note">Форма работает на вашем устройстве. Сайт не сохраняет и не отправляет ваши данные без вашего действия.</p>
         </form>
       </section>
     </main>
@@ -357,21 +357,23 @@
         <button type="button" class="legal-link">Конфиденциальность</button>
         <a href="#reserve">Поддержка</a>
       </div>
-      <small>Демонстрационная версия. Данные не отправляются, оплата не производится. Не является публичной офертой.</small>
+      <small>Запись в лист ожидания бесплатная. Сайт не хранит данные и не принимает оплату. Не является публичной офертой.</small>
     </footer>
 
     <dialog class="demo-dialog" id="demo-dialog">
       <button class="dialog-close" type="button" aria-label="Закрыть">×</button>
       <div class="dialog-icon" aria-hidden="true">↗</div>
-      <p class="kicker">Демо-заявка заполнена</p>
-      <h2>Следующим шагом будет оплата по СБП</h2>
+      <p class="kicker" id="dialog-kicker">Заявка готова</p>
+      <h2 id="dialog-title">Отправьте её автору публикации</h2>
       <p id="dialog-summary"></p>
-      <div class="dialog-receipt">
-        <span>Планируемый резерв</span>
-        <strong>99 ₽</strong>
+      <div class="dialog-receipt" id="dialog-receipt">
+        <span>Стоимость записи</span>
+        <strong>Бесплатно</strong>
       </div>
-      <p class="dialog-note">В публичном прототипе деньги не списываются и данные не отправляются. Реальная оплата появится после подключения продавца, кассы и банка.</p>
-      <button class="button button--dark button--wide dialog-done" type="button">Понятно</button>
+      <p class="dialog-note" id="dialog-note">Нажмите кнопку ниже и выберите личный чат с автором публикации. На компьютере текст можно скопировать.</p>
+      <p class="share-status" id="share-status" role="status" aria-live="polite"></p>
+      <button class="button button--dark button--wide" id="share-application" type="button">Отправить заявку</button>
+      <button class="dialog-done" type="button">Закрыть</button>
     </dialog>
 
     <script src="script.js"></script>
