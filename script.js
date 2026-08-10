@@ -23,7 +23,7 @@ form.addEventListener("submit", (event) => {
   }
 
   const data = new FormData(form);
-  summary.textContent = `${data.get("building")}, ${data.get("slot")}. Вы выбрали тариф «${data.get("plan")}».`;
+  summary.textContent = `${data.get("building")}, удобное время — ${data.get("slot")}. Предварительный тариф: «${data.get("plan")}».`;
   dialog.showModal();
 });
 

@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f2f5ec" />
     <meta
       name="description"
-      content="За дверью — прототип сервиса планового выноса бытового мусора для жителей ЖК Вестердам."
+      content="За дверью — демонстрационная версия сервиса планового выноса бытового мусора для жителей ЖК «Вестердам»."
     />
     <title>За дверью — вынос мусора по расписанию</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -19,8 +19,8 @@
   </head>
   <body>
     <div class="prototype-bar">
-      <span>Интерактивный прототип</span>
-      <span class="prototype-bar__note">Оплата не списывается</span>
+      <span>Демонстрационная версия</span>
+      <span class="prototype-bar__note">Данные и оплата не отправляются</span>
     </div>
 
     <header class="site-header" id="top">
@@ -34,26 +34,31 @@
         <a href="#rules">Правила</a>
         <a href="#faq">Вопросы</a>
       </nav>
-      <a class="button button--small button--dark" href="#reserve">Забронировать за 99 ₽</a>
+      <a class="button button--small button--dark" href="#reserve">Открыть демо-заявку</a>
     </header>
 
     <main>
       <section class="hero section-shell">
         <div class="hero__copy">
-          <div class="eyebrow"><span></span> Пилотный запуск в ЖК «Вестердам»</div>
-          <h1>Оставьте пакет<br /><em>за дверью</em> —<br />мы вынесем его<br />по расписанию</h1>
+          <div class="eyebrow"><span></span> Готовим пилот в ЖК «Вестердам»</div>
+          <h1>
+            <span>Оставьте пакет</span>
+            <span><em>за дверью</em> —</span>
+            <span>мы вынесем его</span>
+            <span>по расписанию</span>
+          </h1>
           <p class="hero__lead">
-            Получите уведомление перед обходом, выставьте закрытый пакет — исполнитель
-            заберёт его и отнесёт в контейнер вашего дома.
+            Перед обходом пришлём уведомление. Вы выставите закрытый пакет, а исполнитель
+            заберёт его и отнесёт на контейнерную площадку вашего дома.
           </p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#reserve">Забронировать место за 99 ₽</a>
-            <a class="text-link" href="#how">Как всё устроено <span>↘</span></a>
+            <a class="button button--primary" href="#reserve">Пройти демо-запись</a>
+            <a class="text-link" href="#how">Как работает <span>↘</span></a>
           </div>
           <div class="hero__facts" aria-label="Основные условия">
-            <span>до 60 литров</span>
-            <span>до 5 килограммов</span>
-            <span>без входа в квартиру</span>
+            <span>до 60 л</span>
+            <span>до 5 кг</span>
+            <span>исполнитель не входит в квартиру</span>
           </div>
         </div>
 
@@ -90,9 +95,9 @@
       </section>
 
       <section class="trust-strip section-shell" aria-label="Условия раннего доступа">
-        <div><strong>99 ₽</strong><span>в счёт подписки</span></div>
-        <div><strong>1 пакет</strong><span>первый вынос бесплатно</span></div>
-        <div><strong>30 дней</strong><span>на запуск или возврат</span></div>
+        <div><strong>99 ₽</strong><span>планируемый резерв</span></div>
+        <div><strong>1 пакет</strong><span>бесплатно после запуска</span></div>
+        <div><strong>30 дней</strong><span>на запуск корпуса или возврат</span></div>
       </section>
 
       <section class="section section-shell" id="how">
@@ -108,25 +113,25 @@
             <span class="step-card__number">01</span>
             <div class="step-card__icon icon-clock" aria-hidden="true"></div>
             <h3>Выберите время</h3>
-            <p>Утро, день или вечер. Первый маршрут запустится там, где соберётся больше участников.</p>
+            <p>Выберите утро, день или вечер. В пилоте запустим интервал с наибольшим числом заявок.</p>
           </article>
           <article class="step-card">
             <span class="step-card__number">02</span>
             <div class="step-card__icon icon-bell" aria-hidden="true"></div>
             <h3>Получите уведомление</h3>
-            <p>Предупредим за 10–15 минут. Пакет не будет стоять в коридоре всё окно.</p>
+            <p>Сообщим о приближении исполнителя за 10–15 минут, чтобы пакет не ждал в коридоре заранее.</p>
           </article>
           <article class="step-card">
             <span class="step-card__number">03</span>
             <div class="step-card__icon icon-bag" aria-hidden="true"></div>
             <h3>Выставьте пакет</h3>
-            <p>До 60 л и 5 кг. Несколько пакетов можно добавить в один заказ.</p>
+            <p>Выставьте закрытый пакет до 60 л и 5 кг. Несколько пакетов можно добавить в один заказ.</p>
           </article>
           <article class="step-card step-card--dark">
             <span class="step-card__number">04</span>
             <div class="step-card__icon icon-check" aria-hidden="true"></div>
             <h3>Готово</h3>
-            <p>Исполнитель отнесёт пакет в контейнер вашего дома, а статус появится в кабинете.</p>
+            <p>Исполнитель отнесёт пакет на контейнерную площадку, а вы получите подтверждение выполнения.</p>
           </article>
         </div>
       </section>
@@ -141,12 +146,12 @@
             <article>
               <span>01</span>
               <h3>Не спускаться специально</h3>
-              <p>Не нужно ждать лифт, одеваться и идти до контейнера ради одного пакета.</p>
+              <p>Не нужно специально одеваться, ждать лифта и идти к контейнерам ради одного пакета.</p>
             </article>
             <article>
               <span>02</span>
-              <h3>Управлять без звонков</h3>
-              <p>Кредиты, пауза, дополнительные пакеты и продление — в личном кабинете.</p>
+              <h3>Управлять в одном месте</h3>
+              <p>В рабочей версии будут доступны остаток пакетов, пауза, дополнительные выносы и продление.</p>
             </article>
             <article>
               <span>03</span>
@@ -172,31 +177,31 @@
         <div class="plans-grid">
           <article class="plan-card">
             <div class="plan-card__top"><span>Базовый</span><span>8 пакетов</span></div>
-            <div class="plan-card__price"><strong>792</strong><span>₽ / месяц</span></div>
-            <p>Для помощи несколько раз в неделю.</p>
+            <div class="plan-card__price"><strong>792</strong><span>₽ в месяц</span></div>
+            <p>До двух пакетов в неделю.</p>
             <button class="button button--outline select-plan" data-plan="Базовый — 792 ₽">Выбрать</button>
           </article>
 
           <article class="plan-card plan-card--featured">
             <div class="plan-card__tag">Для семьи</div>
             <div class="plan-card__top"><span>Семейный</span><span>15 пакетов</span></div>
-            <div class="plan-card__price"><strong>1 390</strong><span>₽ / месяц</span></div>
-            <p>Через день или несколько пакетов за раз.</p>
+            <div class="plan-card__price"><strong>1 390</strong><span>₽ в месяц</span></div>
+            <p>В среднем один пакет через день.</p>
             <button class="button button--dark select-plan" data-plan="Семейный — 1 390 ₽">Выбрать</button>
           </article>
 
           <article class="plan-card">
             <div class="plan-card__top"><span>Ежедневный</span><span>30 пакетов</span></div>
-            <div class="plan-card__price"><strong>2 490</strong><span>₽ / месяц</span></div>
-            <p>Цена пилота. Затем ориентир — 2 970 ₽.</p>
+            <div class="plan-card__price"><strong>2 490</strong><span>₽ в месяц</span></div>
+            <p>До одного пакета каждый день.</p>
             <button class="button button--outline select-plan" data-plan="Ежедневный — 2 490 ₽">Выбрать</button>
           </article>
         </div>
 
         <div class="plans-note">
           <span>Дополнительный пакет — 99 ₽</span>
-          <span>Пауза на 7–30 дней</span>
-          <span>Напомним о продлении за 3 дня</span>
+          <span>Пауза на 7–30 дней один раз за период</span>
+          <span>Напомним об автопродлении за 3 дня</span>
         </div>
       </section>
 
@@ -206,7 +211,7 @@
             <p class="kicker">Правила пакета</p>
             <h2>Обычный бытовой мусор.<br />Никаких сюрпризов.</h2>
             <p>
-              Если пакет плохо завязан, но не течёт, исполнитель целиком поместит его
+              Если пакет непрочно завязан, но не протекает, исполнитель целиком поместит его
               в защитный пакет. Мы никогда не открываем и не перекладываем содержимое руками.
             </p>
           </div>
@@ -217,7 +222,7 @@
                 <li>пищевые отходы без свободной жидкости</li>
                 <li>упаковка, бумага и пластик</li>
                 <li>целые бутылки и банки</li>
-                <li>наполнитель в двойном пакете</li>
+                <li>кошачий наполнитель в двойном пакете</li>
               </ul>
             </article>
             <article class="rule-card rule-card--no">
@@ -226,7 +231,7 @@
                 <li>строительный мусор и мебель</li>
                 <li>батарейки, лампы и химикаты</li>
                 <li>иглы и разбитое стекло</li>
-                <li>протекающий пакет или более 5 кг</li>
+                <li>протекающие пакеты и пакеты тяжелее 5 кг</li>
               </ul>
             </article>
           </div>
@@ -239,7 +244,7 @@
             <p class="kicker">Вопросы</p>
             <h2>Всё, что важно<br />до первого выноса</h2>
           </div>
-          <p class="section-intro">Не нашли ответ? Напишите команде пилота — поддержка ответит напрямую.</p>
+          <p class="section-intro">Сейчас сайт показывает сценарий будущего сервиса. Реальные заявки и оплата пока отключены.</p>
         </div>
         <div class="faq-list">
           <details>
@@ -256,11 +261,11 @@
           </details>
           <details>
             <summary>Как работает пауза?<span>+</span></summary>
-            <p>Один раз за период подписку можно остановить на 7–30 дней. Срок кредитов и следующего списания сдвинется на срок паузы.</p>
+            <p>Один раз за период подписку можно будет приостановить на 7–30 дней. Срок действия пакетов и дата следующего списания сдвинутся на срок паузы.</p>
           </details>
           <details>
             <summary>Куда исполнитель относит мусор?<span>+</span></summary>
-            <p>В предусмотренный контейнер, обслуживающий ваш дом. Мы не складируем пакеты и не перевозим их в другие районы.</p>
+            <p>На контейнерную площадку вашего дома — после согласования правил с управляющей компанией. Мы не планируем складировать пакеты или перевозить их в другие районы.</p>
           </details>
         </div>
       </section>
@@ -268,18 +273,18 @@
       <section class="reserve section-shell" id="reserve">
         <div class="reserve__copy">
           <p class="kicker kicker--light">Ранний доступ</p>
-          <h2>Пусть мусор останется<br />за дверью — и исчезнет<br />по расписанию</h2>
-          <p>Забронируйте участие в пилоте. 99 ₽ пойдут в первую подписку, первый пакет вынесем бесплатно.</p>
+          <h2>Посмотрите, как будет работать запись на пилот</h2>
+          <p>Выберите корпус, удобное время и предварительный тариф. В этой версии данные не отправляются, а деньги не списываются.</p>
           <div class="reserve__assurances">
-            <span>↗ возврат при незапуске</span>
-            <span>↗ без входа в квартиру</span>
-            <span>↗ оплата через СБП после запуска</span>
+            <span>↗ без отправки данных</span>
+            <span>↗ без списания денег</span>
+            <span>↗ сценарий СБП показан условно</span>
           </div>
         </div>
 
         <form class="reserve-form" id="reserve-form" novalidate>
           <div class="form-head">
-            <div><span>Резерв</span><strong>99 ₽</strong></div>
+            <div><span>Планируемый резерв</span><strong>99 ₽</strong></div>
             <span class="demo-pill">демо</span>
           </div>
 
@@ -333,11 +338,11 @@
 
           <label class="check-row">
             <input type="checkbox" name="terms" required />
-            <span>Согласен с условиями демонстрационного резерва и лимитом 60 л / 5 кг</span>
+            <span>Я понимаю, что это демонстрация: данные не отправляются, оплата не производится</span>
           </label>
 
           <p class="form-error" id="form-error" role="alert"></p>
-          <button class="button button--primary button--wide" type="submit">Продолжить с СБП <span>→</span></button>
+          <button class="button button--primary button--wide" type="submit">Показать следующий шаг <span>→</span></button>
           <p class="form-note">Прототип не принимает и не сохраняет данные. Деньги не списываются.</p>
         </form>
       </section>
@@ -352,17 +357,17 @@
         <button type="button" class="legal-link">Конфиденциальность</button>
         <a href="#reserve">Поддержка</a>
       </div>
-      <small>Интерактивный прототип. Не является публичной офертой.</small>
+      <small>Демонстрационная версия. Данные не отправляются, оплата не производится. Не является публичной офертой.</small>
     </footer>
 
     <dialog class="demo-dialog" id="demo-dialog">
       <button class="dialog-close" type="button" aria-label="Закрыть">×</button>
       <div class="dialog-icon" aria-hidden="true">↗</div>
-      <p class="kicker">Сценарий собран</p>
-      <h2>Здесь откроется<br />оплата через СБП</h2>
+      <p class="kicker">Демо-заявка заполнена</p>
+      <h2>Следующим шагом будет оплата по СБП</h2>
       <p id="dialog-summary"></p>
       <div class="dialog-receipt">
-        <span>Резерв места</span>
+        <span>Планируемый резерв</span>
         <strong>99 ₽</strong>
       </div>
       <p class="dialog-note">В публичном прототипе деньги не списываются и данные не отправляются. Реальная оплата появится после подключения продавца, кассы и банка.</p>
