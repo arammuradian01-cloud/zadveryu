@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-const APPLICATION_EMAIL = 'I@arammuradian.ru';
+const APPLICATION_EMAIL = 'I@arammuradyan.ru';
 const SENDER_EMAIL = 'website@outthedoor.ru';
 const CONSENT_VERSION = 'personal-data-v1.3-2026-08-10';
-const CONSENT_TEXT = 'Я даю оператору проекта «За дверью» — ИП Мурадяну Армену Мурадовичу — согласие на обработку указанных в анкете персональных данных, чтобы принять заявку, оценить спрос по дому и связаться со мной. Срок обработки — до завершения работы по заявке, но не более 12 месяцев с последнего содержательного взаимодействия. Отзыв: I@arammuradian.ru.';
+const CONSENT_TEXT = 'Я даю оператору проекта «За дверью» — ИП Мурадяну Армену Мурадовичу — согласие на обработку указанных в анкете персональных данных, чтобы принять заявку, оценить спрос по дому и связаться со мной. Срок обработки — до завершения работы по заявке, но не более 12 месяцев с последнего содержательного взаимодействия. Отзыв: I@arammuradyan.ru.';
 
 header('Content-Type: application/json; charset=UTF-8');
 header('Cache-Control: no-store, max-age=0');
@@ -142,7 +142,7 @@ $headers = [
 $sent = function_exists('mail') && mail(APPLICATION_EMAIL, $subject, $body, implode("\r\n", $headers));
 if (!$sent) {
     error_log('outthedoor_form_mail_failed form_id=' . $formId);
-    respond(503, ['ok' => false, 'message' => 'Не удалось отправить заявку. Попробуйте ещё раз или напишите на I@arammuradian.ru.']);
+    respond(503, ['ok' => false, 'message' => 'Не удалось отправить заявку. Попробуйте ещё раз или напишите на I@arammuradyan.ru.']);
 }
 
 respond(200, [

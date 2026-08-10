@@ -22,7 +22,7 @@ const dadataToken = document.querySelector('meta[name="dadata-token"]')?.content
 
 const DADATA_ADDRESS_URL = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
 const ADDRESS_SEARCH_DELAY = 320;
-const APPLICATION_EMAIL = "I@arammuradian.ru";
+const APPLICATION_EMAIL = "I@arammuradyan.ru";
 const CONSENT_VERSION = "personal-data-v1.3-2026-08-10";
 const PRODUCTION_HOSTS = new Set(["outthedoor.ru", "www.outthedoor.ru"]);
 const isProductionHost = PRODUCTION_HOSTS.has(window.location.hostname.toLowerCase());
