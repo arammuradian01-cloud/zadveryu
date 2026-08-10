@@ -13,6 +13,9 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
   Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; upgrade-insecure-requests"
   Header always set Strict-Transport-Security "max-age=31536000"
+  <FilesMatch "\.(html|css|js)$">
+    Header always set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
 </IfModule>
 
 <FilesMatch "(^\.|\.(md|log|ini|env|bak|sql)$)">
