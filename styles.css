@@ -330,6 +330,7 @@ legend { margin-bottom: 8px; }
 .demo-dialog > p { color: var(--ink-soft); line-height: 1.6; }
 .dialog-note { font-size: 11px; }
 .share-status { min-height: 24px; margin: 14px 0 8px; color: var(--ink); font-size: 13px; font-weight: 700; }
+.dialog-copy { margin-top: 10px; }
 .dialog-done { width: 100%; min-height: 44px; margin-top: 8px; border: 0; background: transparent; color: var(--ink-soft); cursor: pointer; font: 700 13px "Manrope", sans-serif; }
 [hidden] { display: none !important; }
 

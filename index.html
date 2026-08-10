@@ -15,7 +15,6 @@
   <body>
     <div class="prototype-bar">
       <span>Собираем заявки из разных ЖК</span>
-      <span class="prototype-bar__note">Запись в лист ожидания бесплатная</span>
     </div>
 
     <header class="site-header" id="top">
@@ -60,7 +59,7 @@
         <form class="reserve-form reserve-form--hero" id="reserve-form" novalidate>
           <div class="form-head">
             <div><strong>Оставьте заявку</strong><span>займёт около 2 минут</span></div>
-            <span class="demo-pill">бесплатно</span>
+            <span class="demo-pill">лист ожидания</span>
           </div>
           <p class="form-intro">Сначала запустим дома и ЖК, где соберётся больше всего желающих.</p>
 
@@ -150,7 +149,7 @@
 
           <p class="form-error" id="form-error" role="alert"></p>
           <button class="button button--primary button--wide" type="submit">Подготовить заявку <span>→</span></button>
-          <p class="form-note">Данные остаются на вашем устройстве. Адрес можно ввести вручную; готовую заявку отправляете только вы.</p>
+          <p class="form-note">Данные остаются на вашем устройстве до отправки. Готовое письмо будет адресовано на I@arammuradian.ru, а отправку подтвердите вы.</p>
         </form>
       </section>
 
@@ -348,20 +347,21 @@
         <a href="privacy.html">Политика ПДн</a>
         <a href="cookies.html">Cookie</a>
         <button class="cookie-settings-link" type="button" data-cookie-settings>Настройки cookie</button>
-        <a href="#reserve">Поддержка</a>
+        <a href="mailto:I@arammuradian.ru">I@arammuradian.ru</a>
       </div>
-      <small>Запись в лист ожидания бесплатная. Сайт не хранит данные и не принимает оплату. Не является публичной офертой.</small>
+      <small>Сайт не хранит данные и не принимает оплату. Не является публичной офертой.</small>
     </footer>
 
     <dialog class="demo-dialog" id="demo-dialog">
       <button class="dialog-close" type="button" aria-label="Закрыть">×</button>
       <div class="dialog-icon" aria-hidden="true">↗</div>
       <p class="kicker" id="dialog-kicker">Заявка готова</p>
-      <h2 id="dialog-title">Отправьте её автору публикации</h2>
+      <h2 id="dialog-title">Отправьте заявку по почте</h2>
       <p id="dialog-summary"></p>
-      <p class="dialog-note" id="dialog-note">Нажмите кнопку ниже и выберите личный чат с автором публикации. На компьютере текст можно скопировать.</p>
+      <p class="dialog-note" id="dialog-note">Откроется почтовое приложение с получателем I@arammuradian.ru и готовым текстом. Проверьте письмо и подтвердите отправку.</p>
       <p class="share-status" id="share-status" role="status" aria-live="polite"></p>
-      <button class="button button--dark button--wide" id="share-application" type="button">Отправить заявку</button>
+      <a class="button button--dark button--wide" id="share-application" href="#">Отправить по почте</a>
+      <button class="button button--outline button--wide dialog-copy" id="copy-application" type="button">Скопировать заявку</button>
       <button class="dialog-done" type="button">Закрыть</button>
     </dialog>
 
