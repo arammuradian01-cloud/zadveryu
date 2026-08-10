@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f2f5ec" />
+    <meta name="dadata-token" content="0fb9585e9f13f2e3c4e7b58f6bd9c1302237dc26" />
     <meta
       name="description"
       content="За дверью — пилот сервиса планового выноса бытового мусора для жителей многоквартирных домов."
@@ -308,11 +309,28 @@
             </label>
           </div>
 
-          <label>
-            <span>Адрес дома</span>
-            <input type="text" name="address" autocomplete="street-address" aria-describedby="address-note" placeholder="Улица, дом, корпус / строение" required />
-            <small class="input-note" id="address-note">Номер квартиры на этом этапе не нужен.</small>
-          </label>
+          <div class="form-field address-field">
+            <label for="address-input">Адрес дома</label>
+            <div class="address-combobox">
+              <input
+                id="address-input"
+                type="text"
+                name="address"
+                autocomplete="off"
+                aria-autocomplete="list"
+                aria-controls="address-suggestions"
+                aria-describedby="address-note address-status"
+                aria-expanded="false"
+                aria-haspopup="listbox"
+                placeholder="Начните вводить улицу и дом"
+                role="combobox"
+                required
+              />
+              <div class="address-suggestions" id="address-suggestions" role="listbox" hidden></div>
+            </div>
+            <small class="input-note" id="address-note">Выберите адрес до дома. Номер квартиры на этом этапе не нужен.</small>
+            <small class="address-status" id="address-status" role="status" aria-live="polite"></small>
+          </div>
 
           <label>
             <span>Подъезд / секция — необязательно</span>
@@ -345,7 +363,7 @@
 
           <p class="form-error" id="form-error" role="alert"></p>
           <button class="button button--primary button--wide" type="submit">Подготовить заявку <span>→</span></button>
-          <p class="form-note">Форма работает на вашем устройстве. Сайт не сохраняет и не отправляет ваши данные без вашего действия.</p>
+          <p class="form-note">Сайт не сохраняет данные. При работе подсказок введённая часть адреса передаётся сервису DaData; готовую заявку отправляете только вы.</p>
         </form>
       </section>
     </main>
