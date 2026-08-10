@@ -66,11 +66,19 @@ form.addEventListener("submit", (event) => {
 
   const data = new FormData(form);
   const source = getSourceLabel();
+  const entrance = data.get("entrance").trim();
+  const location = [
+    data.get("city"),
+    `ЖК «${data.get("complex")}»`,
+    data.get("address"),
+    entrance ? `подъезд/секция ${entrance}` : "",
+  ].filter(Boolean);
+
   applicationText = [
     "Заявка на пилот «За дверью»",
     `Имя: ${data.get("name")}`,
     `Телефон: ${data.get("phone")}`,
-    `Дом: ${data.get("building")}, подъезд/секция ${data.get("entrance")}`,
+    `Адрес: ${location.join(", ")}`,
     `Время: ${data.get("slot")}`,
     `Тариф: ${data.get("plan")}`,
     `Источник: ${source}`,
@@ -78,7 +86,7 @@ form.addEventListener("submit", (event) => {
 
   dialogKicker.textContent = "Заявка готова";
   dialogTitle.textContent = "Отправьте её автору публикации";
-  summary.textContent = `${data.get("building")}, подъезд/секция ${data.get("entrance")}; удобное время — ${data.get("slot")}.`;
+  summary.textContent = `ЖК «${data.get("complex")}», ${data.get("address")}; удобное время — ${data.get("slot")}.`;
   dialogReceipt.hidden = false;
   dialogNote.hidden = false;
   shareButton.hidden = false;

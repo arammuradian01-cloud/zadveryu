@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f2f5ec" />
     <meta
       name="description"
-      content="За дверью — пилот сервиса планового выноса бытового мусора для жителей ЖК «Вестердам»."
+      content="За дверью — пилот сервиса планового выноса бытового мусора для жителей многоквартирных домов."
     />
     <title>За дверью — вынос мусора по расписанию</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -19,7 +19,7 @@
   </head>
   <body>
     <div class="prototype-bar">
-      <span>Готовим пилот в ЖК «Вестердам»</span>
+      <span>Собираем заявки из разных ЖК</span>
       <span class="prototype-bar__note">Запись в лист ожидания бесплатная</span>
     </div>
 
@@ -40,7 +40,7 @@
     <main>
       <section class="hero section-shell">
         <div class="hero__copy">
-          <div class="eyebrow"><span></span> Готовим пилот в ЖК «Вестердам»</div>
+          <div class="eyebrow"><span></span> Проверяем спрос в вашем ЖК</div>
           <h1>
             <span>Оставьте пакет</span>
             <span><em>за дверью</em> —</span>
@@ -97,7 +97,7 @@
       <section class="trust-strip section-shell" aria-label="Условия раннего доступа">
         <div><strong>99 ₽</strong><span>планируемый резерв</span></div>
         <div><strong>1 пакет</strong><span>бесплатно после запуска</span></div>
-        <div><strong>30 дней</strong><span>на запуск корпуса или возврат</span></div>
+        <div><strong>30 дней</strong><span>на запуск вашего ЖК или возврат</span></div>
       </section>
 
       <section class="section section-shell" id="how">
@@ -244,7 +244,7 @@
             <p class="kicker">Вопросы</p>
             <h2>Всё, что важно<br />до первого выноса</h2>
           </div>
-          <p class="section-intro">Сейчас собираем лист ожидания и выбираем корпус с наибольшим спросом. Оплата пока не принимается.</p>
+          <p class="section-intro">Сейчас собираем лист ожидания и выбираем дома и ЖК с наибольшим спросом. Оплата пока не принимается.</p>
         </div>
         <div class="faq-list">
           <details>
@@ -257,7 +257,7 @@
           </details>
           <details>
             <summary>Что будет с 99 ₽, если запуск не состоится?<span>+</span></summary>
-            <p>Если маршрут в вашем корпусе не запустится в течение 30 дней, резерв будет возвращён.</p>
+            <p>Если маршрут в вашем доме или ЖК не запустится в течение 30 дней, резерв будет возвращён.</p>
           </details>
           <details>
             <summary>Как работает пауза?<span>+</span></summary>
@@ -274,7 +274,7 @@
         <div class="reserve__copy">
           <p class="kicker kicker--light">Ранний доступ</p>
           <h2>Встаньте в лист ожидания</h2>
-          <p>Выберите корпус, удобное время и предварительный тариф. После заполнения отправьте готовую заявку автору публикации через удобный мессенджер.</p>
+          <p>Укажите свой ЖК, адрес дома, удобное время и предварительный тариф. После заполнения отправьте готовую заявку автору публикации.</p>
           <div class="reserve__assurances">
             <span>↗ бесплатно</span>
             <span>↗ без списания денег</span>
@@ -299,23 +299,25 @@
 
           <div class="form-grid">
             <label>
-              <span>Корпус</span>
-              <select name="building" required>
-                <option value="">Выберите</option>
-                <option>Корпус 1</option>
-                <option>Корпус 2</option>
-                <option>Корпус 3</option>
-                <option>Корпус 4</option>
-                <option>Корпус 5</option>
-                <option>Корпус 6</option>
-                <option>Корпус 7</option>
-              </select>
+              <span>Город</span>
+              <input type="text" name="city" autocomplete="address-level2" value="Москва" required />
             </label>
             <label>
-              <span>Подъезд / секция</span>
-              <input type="text" name="entrance" placeholder="Например, 2" required />
+              <span>Название ЖК</span>
+              <input type="text" name="complex" placeholder="Например, Вестердам" required />
             </label>
           </div>
+
+          <label>
+            <span>Адрес дома</span>
+            <input type="text" name="address" autocomplete="street-address" aria-describedby="address-note" placeholder="Улица, дом, корпус / строение" required />
+            <small class="input-note" id="address-note">Номер квартиры на этом этапе не нужен.</small>
+          </label>
+
+          <label>
+            <span>Подъезд / секция — необязательно</span>
+            <input type="text" name="entrance" placeholder="Например, 2" />
+          </label>
 
           <fieldset>
             <legend>Удобнее всего</legend>
