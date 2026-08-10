@@ -7,6 +7,7 @@ const dialogKicker = document.querySelector("#dialog-kicker");
 const dialogTitle = document.querySelector("#dialog-title");
 const dialogNote = document.querySelector("#dialog-note");
 const shareButton = document.querySelector("#share-application");
+const copyButton = document.querySelector("#copy-application");
 const shareStatus = document.querySelector("#share-status");
 const cityInput = form.elements.city;
 const addressInput = form.elements.address;
@@ -16,6 +17,7 @@ const dadataToken = document.querySelector('meta[name="dadata-token"]')?.content
 
 const DADATA_ADDRESS_URL = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
 const ADDRESS_SEARCH_DELAY = 320;
+const APPLICATION_EMAIL = "I@arammuradian.ru";
 
 let addressSearchTimer;
 let addressSearchController;
@@ -274,37 +276,26 @@ form.addEventListener("submit", (event) => {
   ].join("\n");
 
   dialogKicker.textContent = "Заявка готова";
-  dialogTitle.textContent = "Отправьте её автору публикации";
+  dialogTitle.textContent = "Отправьте заявку по почте";
   summary.textContent = `ЖК «${data.get("complex")}», ${data.get("address")}; удобное время — ${data.get("slot")}.`;
   dialogNote.hidden = false;
   shareButton.hidden = false;
+  copyButton.hidden = false;
   shareStatus.textContent = "";
-  shareButton.textContent = navigator.share ? "Отправить заявку" : "Скопировать заявку";
+  shareButton.href = `mailto:${APPLICATION_EMAIL}?subject=${encodeURIComponent(`Заявка на пилот «За дверью» — ${data.get("complex")}`)}&body=${encodeURIComponent(applicationText)}`;
   dialog.showModal();
 });
 
-shareButton.addEventListener("click", async () => {
-  shareStatus.textContent = "";
+shareButton.addEventListener("click", () => {
+  shareStatus.textContent = `Открываем письмо для ${APPLICATION_EMAIL}. Подтвердите отправку в почтовом приложении.`;
+});
 
+copyButton.addEventListener("click", async () => {
   try {
-    if (navigator.share) {
-      await navigator.share({
-        title: "Заявка на пилот «За дверью»",
-        text: applicationText,
-      });
-      shareStatus.textContent = "Заявка передана выбранному получателю.";
-      return;
-    }
-
     await copyText(applicationText);
-    shareStatus.textContent = "Заявка скопирована. Отправьте её автору публикации.";
-  } catch (shareError) {
-    if (shareError.name === "AbortError") {
-      shareStatus.textContent = "Отправка отменена. Заявка осталась в форме.";
-      return;
-    }
-
-    shareStatus.textContent = "Не удалось подготовить отправку. Скопируйте данные из формы вручную.";
+    shareStatus.textContent = `Заявка скопирована. Отправьте её на ${APPLICATION_EMAIL}.`;
+  } catch {
+    shareStatus.textContent = "Не удалось скопировать заявку. Выделите данные в форме вручную.";
   }
 });
 
