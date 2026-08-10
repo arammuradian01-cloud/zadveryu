@@ -5,7 +5,6 @@ const error = document.querySelector("#form-error");
 const planSelect = document.querySelector("#plan-select");
 const dialogKicker = document.querySelector("#dialog-kicker");
 const dialogTitle = document.querySelector("#dialog-title");
-const dialogReceipt = document.querySelector("#dialog-receipt");
 const dialogNote = document.querySelector("#dialog-note");
 const shareButton = document.querySelector("#share-application");
 const shareStatus = document.querySelector("#share-status");
@@ -244,7 +243,7 @@ form.addEventListener("submit", (event) => {
   error.textContent = "";
 
   if (!form.checkValidity()) {
-    error.textContent = "Заполните обязательные поля и подтвердите условия.";
+    error.textContent = "Заполните обязательные поля и поставьте галочку согласия на обработку персональных данных.";
     form.reportValidity();
     return;
   }
@@ -270,12 +269,13 @@ form.addEventListener("submit", (event) => {
     `Время: ${data.get("slot")}`,
     `Тариф: ${data.get("plan")}`,
     `Источник: ${source}`,
+    "Согласие на обработку ПДн: дано, редакция 1.0 от 10.08.2026",
+    `Время подтверждения на устройстве: ${new Date().toISOString()}`,
   ].join("\n");
 
   dialogKicker.textContent = "Заявка готова";
   dialogTitle.textContent = "Отправьте её автору публикации";
   summary.textContent = `ЖК «${data.get("complex")}», ${data.get("address")}; удобное время — ${data.get("slot")}.`;
-  dialogReceipt.hidden = false;
   dialogNote.hidden = false;
   shareButton.hidden = false;
   shareStatus.textContent = "";
@@ -314,17 +314,4 @@ document.querySelectorAll(".dialog-close, .dialog-done").forEach((button) => {
 
 dialog.addEventListener("click", (event) => {
   if (event.target === dialog) dialog.close();
-});
-
-document.querySelectorAll(".legal-link").forEach((button) => {
-  button.addEventListener("click", () => {
-    dialogKicker.textContent = "Документы";
-    dialogTitle.textContent = "Юридические условия готовятся";
-    summary.textContent = "Полные условия и политика конфиденциальности будут добавлены до подключения прямого сбора заявок и оплаты. Текущая форма не хранит данные на сайте.";
-    dialogReceipt.hidden = true;
-    dialogNote.hidden = true;
-    shareButton.hidden = true;
-    shareStatus.textContent = "";
-    dialog.showModal();
-  });
 });
